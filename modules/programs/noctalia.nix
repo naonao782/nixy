@@ -8,7 +8,7 @@
       ...
     }:
     let
-      iconTheme = "Catppuccin-SE";
+      iconTheme = "WhiteSur";
       package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
       wrappedPackage = pkgs.writeShellScriptBin "noctalia-shell" ''
         export XDG_DATA_HOME="''${XDG_DATA_HOME:-$HOME/.local/share}"

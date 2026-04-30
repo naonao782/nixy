@@ -1,17 +1,66 @@
 { ... }:
 {
   femboy.modules.fonts =
-    { pkgs, ... }:
+    { lib, pkgs, ... }:
     {
-      fonts.packages = with pkgs; [
-        nerd-fonts.jetbrains-mono
-        nerd-fonts.caskaydia-cove
-        nerd-fonts.iosevka
-        nerd-fonts.fira-mono
-        nerd-fonts.roboto-mono
-        noto-fonts
-        noto-fonts-cjk-sans
-        noto-fonts-color-emoji
-      ];
+      fonts = {
+        fontDir.enable = true;
+        fontconfig.defaultFonts = {
+          serif = [
+            "Source Serif 4"
+            "Noto Serif"
+          ];
+          sansSerif = [
+            "Inter"
+            "Noto Sans"
+          ];
+          monospace = [
+            "JetBrainsMono Nerd Font"
+            "Iosevka Nerd Font"
+          ];
+          emoji = [
+            "Noto Color Emoji"
+          ];
+        };
+
+        packages = lib.attrValues {
+          inherit (pkgs.nerd-fonts)
+            jetbrains-mono
+            caskaydia-cove
+            iosevka
+            fira-mono
+            roboto-mono
+            monaspace
+            commit-mono
+            martian-mono
+            geist-mono
+            hack
+            inconsolata
+            sauce-code-pro
+            meslo-lg
+            blex-mono
+            ubuntu-mono
+            symbols-only
+            ;
+          inherit (pkgs)
+            inter
+            source-sans
+            source-serif
+            ibm-plex
+            atkinson-hyperlegible
+            libertinus
+            noto-fonts
+            noto-fonts-cjk-sans
+            noto-fonts-cjk-serif
+            noto-fonts-color-emoji
+            twitter-color-emoji
+            material-design-icons
+            font-awesome
+            carlito
+            dejavu_fonts
+            sarasa-gothic
+            ;
+        };
+      };
     };
 }

@@ -2,92 +2,145 @@
 {
   femboy.modules.packages =
     { pkgs, ... }:
-    {
-      environment.systemPackages = with pkgs; [
+    let
+      cliPackages = with pkgs; [
         vim
         wget
+        curl
         git
-        gcc
-        gnumake
-        ghostty
-        vscode
-        nodejs
-        brave
-        fastfetch
+        git-lfs
+        gh
+        jq
+        yq-go
+        rsync
+        unzip
+        zip
+        p7zip
+        file
+        tree
+        bat
+        fd
+        ripgrep
+        eza
+        zoxide
         fzf
-        fuzzel
-        mako
+        lazygit
+        fastfetch
         disfetch
-        kitty
-        yazi
-        thunar
         microfetch
-        spotify
-        spotify-tray
-        zathura
-        krabby
+        nitch
+        nix-melt
+      ];
+
+      shellPackages = with pkgs; [
         fish
         atuin
         any-nix-shell
         nix-your-shell
-        lazygit
+        direnv
+        nix-direnv
+        z-lua
+        starship
+        carapace
         tmux
         zellij
-        nitch
-        nix-melt
-        timeshift
-        emacs
+        btop
+        htop
+        just
+      ];
+
+      desktopPackages = with pkgs; [
+        ghostty
+        kitty
+        brave
+        firefox
+        vivaldi
+        vscode
+        google-chrome
+        zed-editor
+        spotify
+        spotify-tray
+        vesktop
+        telegram-desktop
+        obsidian
+        thunar
+        yazi
+        zathura
+        fuzzel
+        mako
+        wl-clipboard
+        grim
+        slurp
+        xsettingsd
+        xournalpp
+      ];
+
+      mediaPackages = with pkgs; [
+        ffmpeg
+        mpv
+        imagemagick
+        krabby
+        reaper
+        ardour
+        pipewire.jack
+      ];
+
+      devPackages = with pkgs; [
+        gcc
+        gnumake
+        clang-tools
+        nodejs
+        bun
         go
         g-ls
-        gh
-        z-lua
-        hicolor-icon-theme
-        adwaita-icon-theme
-        kdePackages.breeze-icons
-        vesktop
-        pciutils
-        brightnessctl
-        starship
-        clang-tools
         python315
         rust-analyzer
         cargo
         rustc
         rustfmt
         clippy
-        firefox
-        gsettings-desktop-schemas
-        glib
-        bun
-        dconf
-        zed-editor
-        zpkgs.catppuccin-icons
-        vivaldi
-        obsidian
-        themechanger
+        emacs
         ghc
         cabal-install
         haskell-language-server
         jetbrains.clion
-        reaper
-        pipewire.jack
-        xournalpp
-        bat
-        fd
-        ripgrep
-        zoxide
-        carapace
-        eza
-        awww
-        wl-clipboard
-        grim
-        slurp
+      ];
+
+      systemPackages = with pkgs; [
+        pciutils
+        usbutils
+        lm_sensors
+        brightnessctl
         playerctl
+        timeshift
+        gsettings-desktop-schemas
+        glib
+        dconf
+        awww
+      ];
+
+      themePackages = with pkgs; [
+        hicolor-icon-theme
+        adwaita-icon-theme
+        kdePackages.breeze-icons
+        whitesur-icon-theme
         whitesur-gtk-theme
         whitesur-cursors
+        morewaita-icon-theme
         qt6Packages.qt6ct
         libsForQt5.qt5ct
-        xsettingsd
+        themechanger
+        zpkgs.catppuccin-icons
       ];
+    in
+    {
+      environment.systemPackages =
+        cliPackages
+        ++ shellPackages
+        ++ desktopPackages
+        ++ mediaPackages
+        ++ devPackages
+        ++ systemPackages
+        ++ themePackages;
     };
 }
