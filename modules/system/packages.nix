@@ -2,9 +2,6 @@
 {
   femboy.modules.packages =
     { pkgs, ... }:
-    let
-      catppuccin-icons = pkgs.callPackage ../../pkgs/catppuccin-icons.nix { };
-    in
     {
       environment.systemPackages = with pkgs; [
         vim
@@ -64,7 +61,7 @@
         bun
         dconf
         zed-editor
-        catppuccin-icons
+        zpkgs.catppuccin-icons
         vivaldi
         obsidian
         themechanger

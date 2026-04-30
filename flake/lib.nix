@@ -1,6 +1,13 @@
 { self, nixpkgs, ... }:
 let
-  inherit (nixpkgs.lib) isFunction mapAttrs setAttrByPath;
+  inherit (nixpkgs.lib)
+    genAttrs
+    isFunction
+    mapAttrs
+    setAttrByPath
+    ;
+
+  supportedSystems = [ "x86_64-linux" ];
 
   mkSourceMap =
     attrPath: basePath: files:
@@ -29,6 +36,19 @@ let
 in
 {
   lib = {
+    mkPkgx = system: self.packages.${system};
+    mkPkgx' = pkgs: self.lib.mkPkgx pkgs.stdenv.hostPlatform.system;
+    pkgsFor = genAttrs supportedSystems (system: nixpkgs.legacyPackages.${system});
+    eachSystem =
+      fn:
+      mapAttrs (
+        system: pkgs:
+        let
+          zpkgs = self.lib.mkPkgx system;
+        in
+        fn { inherit system pkgs zpkgs; }
+      ) self.lib.pkgsFor;
+
     mkDotsModule =
       username: dots: mkSourceMap [ "hjem" "users" username "xdg" "config" "files" ] self.paths.dots dots;
 

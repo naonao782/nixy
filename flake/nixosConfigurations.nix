@@ -20,6 +20,12 @@ let
         self.femboy.hosts.${hostName}
         {
           nixpkgs.overlays = [
+            (_final: prev: {
+              zpkgs = import ../packageSet.nix {
+                pkgs = prev;
+                paths = self.paths;
+              };
+            })
             nix-cachyos-kernel.overlays.default
           ];
         }
