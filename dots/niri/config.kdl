@@ -1,0 +1,252 @@
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+
+        numlock
+    }
+
+    touchpad {
+        tap
+        natural-scroll
+    }
+}
+
+spawn-at-startup "noctalia-shell"
+
+window-rule {
+    draw-border-with-background false
+    geometry-corner-radius 2.0 2.0 2.0 2.0
+    clip-to-geometry true
+}
+
+window-rule {
+    match app-id="^niri$"
+    match app-id="^quickshell$"
+    match app-id="^noctalia-shell$"
+    opacity 0.85
+}
+window-rule {
+    match is-focused=false
+    opacity 0.8
+}
+window-rule {
+    match is-floating=true
+    shadow {
+        on
+    }
+}
+window-rule {
+    match is-window-cast-target=true
+    border {
+        inactive-color "#a9b1d600 "
+    }
+    focus-ring {
+        active-color "#f38ba8"
+        inactive-color "#a9b1d600 "
+    }
+    shadow {
+        color "#f38ba800 "
+    }
+    tab-indicator {
+        active-color "#f38ba8"
+        inactive-color "#a9b1d600"
+    }
+}
+
+layout {
+    empty-workspace-above-first false
+    gaps 6
+    struts {
+        left 2
+        right 2
+        top 5
+        bottom 5
+    }
+    focus-ring {
+        off
+    }
+    border {
+        width 3
+        active-gradient angle=120 from="#a6e3a1" to="#f9e2af" to="#f38ba8" to="#89b4fa" in="oklch longer hue"
+        inactive-gradient angle=180 from="#414868" to="#1e1e2e" in="oklch shorter hue"
+        urgent-gradient from="#800" to="#a33" angle=45
+    }
+    background-color "transparent"
+    shadow {
+        on
+        offset x=2 y=2
+        softness 40
+        spread 6
+        draw-behind-window false
+        color "rgba(0, 0, 0, 0.5)"
+    }
+    tab-indicator {
+        hide-when-single-tab
+        gap -12.0
+        width 4.0
+        length total-proportion=0.1
+        gaps-between-tabs 10.0
+        corner-radius 10.0
+    }
+    default-column-width {
+        proportion 0.5
+    }
+    preset-column-widths {
+        proportion 0.33
+        proportion 0.5
+        proportion 0.75
+        proportion 1.0
+    }
+    center-focused-column "never"
+    always-center-single-column
+}
+
+screenshot-path "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png"
+prefer-no-csd
+overview {
+    backdrop-color "#11121d"
+}
+
+binds {
+    Ctrl+Print {
+	screenshot-window
+    }
+    Mod+Return {
+        spawn "kitty"
+    }
+    Mod+C {
+	center-window
+    }
+    Mod+Down {
+        focus-workspace-down
+    }
+    Mod+Equal {
+        set-column-width "+10%"
+    }
+    Mod+F {
+        maximize-column
+    }
+    Mod+H {
+        focus-column-left
+    }
+    Mod+D {
+        spawn "fuzzel"
+    }
+    Mod+J {
+        focus-window-or-workspace-down
+    }
+    Mod+K {
+        focus-window-or-workspace-up
+    }
+    Mod+L {
+        focus-column-right
+    }
+    
+    Mod+Minus {
+        set-column-width "-10%"
+    }
+    Mod+Period {
+        expel-window-from-column
+    }
+    Mod+Space {
+    	spawn "noctalia-shell" "ipc" "call" "launcher" "toggle";
+    }
+
+    Mod+Q {
+        close-window
+    }
+
+    Mod+Shift+Q {
+        quit
+    }
+    Mod+S {
+    	spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle";
+    }
+    Mod+Comma { 
+	spawn "noctalia-shell" "ipc" "call" "settings" "toggle";
+    }
+    XF86AudioRaiseVolume { 
+    	spawn "noctalia-shell" "ipc" "call" "volume" "increase"; 
+    }
+    XF86AudioLowerVolume { 
+    	spawn "noctalia-shell" "ipc" "call" "volume" "decrease";
+    }
+    XF86AudioMute { 
+    	spawn "noctalia-shell" "ipc" "call" "volume" "muteOutput";
+    }
+    XF86MonBrightnessUp { 
+      spawn "noctalia-shell" "ipc" "call" "brightness" "increase"; 
+    }
+    XF86MonBrightnessDown { 
+    	spawn "noctalia-shell" "ipc" "call" "brightness" "decrease"; 
+    }
+    Mod+V{
+	spawn "noctalia-shell" "ipc" "call" "launcher" "clipboard";
+    }
+    Mod+X {
+        spawn "noctalia-shell" "ipc" "call" "powermenu" "toggle"
+    }
+    Mod+Left {
+        focus-column-left
+    }
+
+    Mod+Right {
+        focus-column-right
+    }
+
+    Mod+Up {
+        focus-window-up
+    }
+
+    Mod+Shift+Left {
+        move-column-left
+    }
+
+    Mod+Shift+Right {
+        move-column-right
+    }
+    Mod+Shift+S {
+        screenshot
+    }
+    Mod+Shift+Space {
+        fullscreen-window
+    }
+    Mod+grave {
+        switch-focus-between-floating-and-tiling
+    }
+    Print {
+        screenshot-screen
+    }
+    Shift+Print {
+        screenshot
+    }
+
+    Mod+1 {
+        focus-workspace 1
+    }
+
+    Mod+2 {
+        focus-workspace 2
+    }
+
+    Mod+3 {
+        focus-workspace 3
+    }
+    Mod+4 {
+	focus-workspace 4
+    }
+
+    Mod+Shift+1 {
+        move-column-to-workspace 1
+    }
+
+    Mod+Shift+2 {
+        move-column-to-workspace 2
+    }
+
+    Mod+Shift+3 {
+        move-column-to-workspace 3
+    }
+}
