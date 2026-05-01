@@ -28,6 +28,7 @@ in
         extraGroups = [
           "wheel"
           "networkmanager"
+          "audio"
         ];
         shell = pkgs.fish;
       };
@@ -61,8 +62,6 @@ in
 
   femboy.dots.shigure-niri = mkDotsModule username {
     "niri/config.kdl" = "/niri/config.kdl";
-    "noctalia/colors.json" = "/noctalia/colors.json";
-    "noctalia/plugins.json" = "/noctalia/plugins.json";
   };
 
   femboy.dots.shigure-browser = mkHomeFilesModule username {

@@ -10,6 +10,7 @@
       self.femboy.dots.shigure-browser
       self.femboy.profiles.default
       self.femboy.profiles.workstation
+      self.femboy.profiles.audio
       self.femboy.profiles.gaming
       self.femboy.profiles.niri
     ];

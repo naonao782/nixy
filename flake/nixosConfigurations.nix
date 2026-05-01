@@ -1,5 +1,6 @@
 inputs@{
   self,
+  audio,
   nixpkgs,
   nix-cachyos-kernel,
   ...
@@ -20,6 +21,7 @@ let
         self.femboy.hosts.${hostName}
         {
           nixpkgs.overlays = [
+            audio.overlays.default
             (_final: prev: {
               zpkgs = import ../packageSet.nix {
                 pkgs = prev;
