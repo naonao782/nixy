@@ -42,6 +42,11 @@
             ubuntu-mono
             symbols-only
             ;
+
+          inherit (pkgs.maple-mono)
+            NF
+            ;
+
           inherit (pkgs)
             inter
             source-sans

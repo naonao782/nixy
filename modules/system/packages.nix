@@ -73,6 +73,7 @@
         slurp
         xsettingsd
         xournalpp
+        equicord
       ];
 
       mediaPackages = with pkgs; [
