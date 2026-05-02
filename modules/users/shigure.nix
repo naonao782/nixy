@@ -55,6 +55,7 @@ in
     "fuzzel/fuzzel.ini" = "/fuzzel/fuzzel.ini";
     "gtk-3.0/settings.ini" = "/gtk-3.0/settings.ini";
     "gtk-4.0/settings.ini" = "/gtk-4.0/settings.ini";
+    "kwalletrc" = "/kwalletrc";
     "qt5ct/qt5ct.conf" = "/qt5ct/qt5ct.conf";
     "qt6ct/qt6ct.conf" = "/qt6ct/qt6ct.conf";
     "xsettingsd/xsettingsd.conf" = "/xsettingsd/xsettingsd.conf";

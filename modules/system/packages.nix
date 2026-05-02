@@ -3,6 +3,10 @@
   femboy.modules.packages =
     { pkgs, ... }:
     let
+      equicordDiscord = pkgs.discord.override {
+        withEquicord = true;
+      };
+
       cliPackages = with pkgs; [
         vim
         wget
@@ -53,8 +57,8 @@
         ghostty
         kitty
         brave
-        firefox
         vivaldi
+        firefox
         vscode
         google-chrome
         zed-editor
@@ -73,7 +77,8 @@
         slurp
         xsettingsd
         xournalpp
-        equicord
+        equicordDiscord
+        heroic
       ];
 
       mediaPackages = with pkgs; [
@@ -82,7 +87,6 @@
         imagemagick
         krabby
         reaper
-        ardour
         pipewire.jack
       ];
 
@@ -102,9 +106,8 @@
         clippy
         emacs
         ghc
+        stylua
         cabal-install
-        haskell-language-server
-        jetbrains.clion
       ];
 
       systemPackages = with pkgs; [
@@ -118,6 +121,7 @@
         glib
         dconf
         awww
+        xwayland-satellite
       ];
 
       themePackages = with pkgs; [

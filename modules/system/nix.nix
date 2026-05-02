@@ -6,6 +6,9 @@
       "flakes"
     ];
 
+    documentation.man.enable = false;
+    documentation.man.cache.enable = false;
+
     nixpkgs.config.allowUnfree = true;
 
     services.xserver.videoDrivers = [ "nvidia" ];
