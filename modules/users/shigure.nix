@@ -6,6 +6,7 @@
 let
   inherit (self.lib) mkDotsModule mkHomeFilesModule;
   username = "shigure";
+  vscodeSettings = self.paths.dots + "/vscode/settings.json";
 in
 {
   femboy.users.shigure =
@@ -39,6 +40,43 @@ in
         directory = config.users.users.${username}.home;
         clobberFiles = true;
       };
+
+      systemd.services."vscode-settings-bootstrap-${username}" = {
+        description = "Materialize a writable VSCode settings.json for ${username}";
+        wantedBy = [ "hjem.target" ];
+        after = [ "hjem-copy@${username}.service" ];
+        serviceConfig.Type = "oneshot";
+        script =
+          let
+            homeDir = config.users.users.${username}.home;
+            target = "${homeDir}/.config/Code/User/settings.json";
+            group = config.users.users.${username}.group;
+          in
+          ''
+            target=${lib.escapeShellArg target}
+            baseline=${lib.escapeShellArg vscodeSettings}
+
+            mkdir -p "$(dirname "$target")"
+
+            if [ ! -e "$target" ]; then
+              cp "$baseline" "$target"
+              chown ${username}:${group} "$target"
+              chmod 0644 "$target"
+              exit 0
+            fi
+
+            if [ -L "$target" ]; then
+              resolved="$(readlink -f "$target")"
+              if [[ "$resolved" == /nix/store/* ]]; then
+                tmp="$(mktemp "$(dirname "$target")/settings.json.XXXXXX")"
+                cp "$target" "$tmp"
+                mv -f "$tmp" "$target"
+                chown ${username}:${group} "$target"
+                chmod 0644 "$target"
+              fi
+            fi
+          '';
+      };
     };
 
   femboy.dots.shigure-cli = mkDotsModule username {
@@ -52,6 +90,7 @@ in
   };
 
   femboy.dots.shigure-gui = mkDotsModule username {
+    "fontconfig/fonts.conf" = "/fontconfig/fonts.conf";
     "fuzzel/fuzzel.ini" = "/fuzzel/fuzzel.ini";
     "gtk-3.0/settings.ini" = "/gtk-3.0/settings.ini";
     "gtk-4.0/settings.ini" = "/gtk-4.0/settings.ini";

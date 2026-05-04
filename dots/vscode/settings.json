@@ -1,0 +1,12 @@
+{
+  "workbench.sideBar.location": "right",
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "workbench.colorTheme": "Everforest Higure",
+  "editor.mouseWheelZoom": true,
+  "editor.fontFamily": "Menlo",
+  "terminal.integrated.fontFamily": "Menlo",
+  "workbench.productIconTheme": "icons-carbon"
+}

@@ -5,22 +5,35 @@
     {
       fonts = {
         fontDir.enable = true;
-        fontconfig.defaultFonts = {
-          serif = [
-            "Source Serif 4"
-            "Noto Serif"
-          ];
-          sansSerif = [
-            "Inter"
-            "Noto Sans"
-          ];
-          monospace = [
-            "JetBrainsMono Nerd Font"
-            "Iosevka Nerd Font"
-          ];
-          emoji = [
-            "Noto Color Emoji"
-          ];
+        fontconfig = {
+          enable = true;
+          antialias = true;
+          hinting = {
+            enable = false;
+            style = "slight";
+          };
+          subpixel = {
+            rgba = "none";
+            lcdfilter = "none";
+          };
+
+          defaultFonts = {
+            serif = [
+              "Source Serif 4"
+              "Noto Serif"
+            ];
+            sansSerif = [
+              "Inter"
+              "Noto Sans"
+            ];
+            monospace = [
+              "JetBrainsMono Nerd Font"
+              "Iosevka Nerd Font"
+            ];
+            emoji = [
+              "Noto Color Emoji"
+            ];
+          };
         };
 
         packages = lib.attrValues {
@@ -68,4 +81,12 @@
         };
       };
     };
+
+  environment.variables = {
+    FREETYPE_PROPERTIES = ''
+      truetype:interpreter-version=40
+      autofitter:no-stem-darkening=1
+      cff:no-stem-darkening=1
+    '';
+  };
 }

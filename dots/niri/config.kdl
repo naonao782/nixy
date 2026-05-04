@@ -15,6 +15,7 @@ input {
 
 spawn-at-startup "noctalia-shell"
 spawn-at-startup "xwayland-satellite"
+spawn-at-startup "xsettingsd"
 
 window-rule {
     draw-border-with-background false
